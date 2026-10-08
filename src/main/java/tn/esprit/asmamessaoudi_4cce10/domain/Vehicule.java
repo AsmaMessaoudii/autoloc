@@ -28,7 +28,7 @@ public class Vehicule {
     private StatutVehicule statut;
     @ManyToOne
     private Agence agence;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "vehicule_equipement",
             joinColumns = @JoinColumn(name = "id_vehicule"),
@@ -36,9 +36,9 @@ public class Vehicule {
     )
     private Set<Equipement> equipements = new HashSet<>();
 
-    @OneToMany(mappedBy = "vehicule")
+    @OneToMany(mappedBy = "vehicule", fetch = FetchType.LAZY)
     Set<Maintenance> maintenances = new HashSet<>();
 
-    @OneToMany(mappedBy = "vehicule")
+    @OneToMany(mappedBy = "vehicule", fetch = FetchType.LAZY)
     Set<Reservation> reservations = new HashSet<>();
 }

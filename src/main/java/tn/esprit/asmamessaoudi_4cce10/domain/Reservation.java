@@ -23,14 +23,14 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     StatutReservation statut;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
 
     Vehicule vehicule;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
 
     Client client;
 
-    @OneToOne(mappedBy = "reservation")
+    @OneToOne(mappedBy = "reservation", fetch = FetchType.LAZY)
     Contrat contrat;
 }

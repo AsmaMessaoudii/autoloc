@@ -21,6 +21,6 @@ public class Maintenance {
     LocalDate dateFin;
     String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     Vehicule vehicule;
 }
