@@ -1,4 +1,7 @@
 package tn.esprit.asmamessaoudi_4cce10.repository;
 
-public interface IEmployeRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import tn.esprit.asmamessaoudi_4cce10.domain.Employe;
+
+public interface IEmployeRepository extends JpaRepository<Employe, Long> {
 }
