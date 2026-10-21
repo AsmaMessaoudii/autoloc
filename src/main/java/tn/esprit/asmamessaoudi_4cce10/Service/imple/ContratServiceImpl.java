@@ -38,7 +38,8 @@ public class ContratServiceImpl implements IContratService {
     @Override
     public Contrat update(Long id, Contrat contrat) {
         verifier(contrat);
-        Contrat existant = findById(id);
+        Contrat existant = contratRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Contrat non trouvé avec l'id : " + id));
         existant.setDateSignature(contrat.getDateSignature());
         existant.setMontantTotal(contrat.getMontantTotal());
         existant.setValide(contrat.isValide());

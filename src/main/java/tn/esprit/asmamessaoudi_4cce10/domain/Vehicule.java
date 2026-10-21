@@ -25,6 +25,7 @@ public class Vehicule {
     @Enumerated(EnumType.STRING)
     private CategorieVehicule categorie;
     private BigDecimal tarifJournalier;
+    @Enumerated(EnumType.STRING)
     private StatutVehicule statut;
     @ManyToOne
     private Agence agence;

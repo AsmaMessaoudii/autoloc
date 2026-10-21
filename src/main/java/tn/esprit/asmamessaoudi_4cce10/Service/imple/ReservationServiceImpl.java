@@ -3,9 +3,9 @@ package tn.esprit.asmamessaoudi_4cce10.Service.imple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.asmamessaoudi_4cce10.domain.Reservation;
-
 import tn.esprit.asmamessaoudi_4cce10.repository.IReservationRepository;
 import tn.esprit.asmamessaoudi_4cce10.Service.IReservationService;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -38,13 +38,14 @@ public class ReservationServiceImpl implements IReservationService {
     @Override
     public Reservation update(Long id, Reservation reservation) {
         verifier(reservation);
-        Reservation existante = findById(id);
-        existante.setDateDebut(reservation.getDateDebut());
-        existante.setDateFin(reservation.getDateFin());
-        existante.setStatut(reservation.getStatut());
-        existante.setVehicule(reservation.getVehicule());
-        existante.setClient(reservation.getClient());
-        return reservationRepository.save(existante);
+        Reservation existant = reservationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reservation non trouvée avec l'id : " + id));
+        existant.setDateDebut(reservation.getDateDebut());
+        existant.setDateFin(reservation.getDateFin());
+        existant.setStatut(reservation.getStatut());
+        existant.setVehicule(reservation.getVehicule());
+        existant.setClient(reservation.getClient());
+        return reservationRepository.save(existant);
     }
 
     @Override

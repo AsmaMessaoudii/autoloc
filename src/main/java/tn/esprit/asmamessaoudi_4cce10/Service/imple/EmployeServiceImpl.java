@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.asmamessaoudi_4cce10.Service.IEmployeService;
 import tn.esprit.asmamessaoudi_4cce10.domain.Employe;
-
 import tn.esprit.asmamessaoudi_4cce10.repository.IEmployeRepository;
 
 import java.util.List;
@@ -39,7 +38,8 @@ public class EmployeServiceImpl implements IEmployeService {
     @Override
     public Employe update(Long id, Employe employe) {
         verifier(employe);
-        Employe existant = findById(id);
+        Employe existant = employeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employé non trouvé avec l'id : " + id));
         existant.setNom(employe.getNom());
         existant.setPrenom(employe.getPrenom());
         existant.setRole(employe.getRole());

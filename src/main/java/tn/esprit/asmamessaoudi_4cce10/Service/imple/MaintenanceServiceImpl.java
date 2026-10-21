@@ -3,7 +3,6 @@ package tn.esprit.asmamessaoudi_4cce10.Service.imple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.asmamessaoudi_4cce10.domain.Maintenance;
-
 import tn.esprit.asmamessaoudi_4cce10.repository.IMaintenanceRepository;
 import tn.esprit.asmamessaoudi_4cce10.Service.IMaintenanceService;
 
@@ -39,12 +38,14 @@ public class MaintenanceServiceImpl implements IMaintenanceService {
     @Override
     public Maintenance update(Long id, Maintenance maintenance) {
         verifier(maintenance);
-        Maintenance existante = findById(id);
-        existante.setDateDebut(maintenance.getDateDebut());
-        existante.setDateFin(maintenance.getDateFin());
-        existante.setDescription(maintenance.getDescription());
-        existante.setVehicule(maintenance.getVehicule());
-        return maintenanceRepository.save(existante);
+
+        Maintenance existant = maintenanceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Maintenance non trouvée avec l'id : " + id));
+        existant.setDateDebut(maintenance.getDateDebut());
+        existant.setDateFin(maintenance.getDateFin());
+        existant.setDescription(maintenance.getDescription());
+        existant.setVehicule(maintenance.getVehicule());
+        return maintenanceRepository.save(existant);
     }
 
     @Override

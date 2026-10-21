@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.asmamessaoudi_4cce10.domain.Client;
 import tn.esprit.asmamessaoudi_4cce10.repository.IClientRepository;
-import tn.esprit.asmamessaoudi_4cce10.service.IClientService;
+import tn.esprit.asmamessaoudi_4cce10.Service.IClientService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -37,7 +37,8 @@ public class ClientServiceImpl implements IClientService {
     @Override
     public Client update(Long id, Client client) {
         verifier(client);
-        Client existant = findById(id);
+        Client existant = clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Client non trouvé avec l'id : " + id));
         existant.setNom(client.getNom());
         existant.setPrenom(client.getPrenom());
         existant.setEmail(client.getEmail());

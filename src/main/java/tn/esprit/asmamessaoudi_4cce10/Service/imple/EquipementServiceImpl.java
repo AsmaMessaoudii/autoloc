@@ -39,7 +39,8 @@ public class EquipementServiceImpl implements IEquipementService {
     @Override
     public Equipement update(Long id, Equipement equipement) {
         verifier(equipement);
-        Equipement existant = findById(id);
+        Equipement existant = equipementRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Equipement non trouvé avec l'id : " + id));
         existant.setLibelle(equipement.getLibelle());
         return equipementRepository.save(existant);
     }

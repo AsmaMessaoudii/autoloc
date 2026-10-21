@@ -1,4 +1,4 @@
-package tn.esprit.asmamessaoudi_4cce10.service;
+package tn.esprit.asmamessaoudi_4cce10.Service;
 
 import tn.esprit.asmamessaoudi_4cce10.domain.Client;
 

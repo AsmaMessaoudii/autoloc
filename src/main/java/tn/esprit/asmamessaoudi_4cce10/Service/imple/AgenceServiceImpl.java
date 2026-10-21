@@ -38,7 +38,8 @@ public class AgenceServiceImpl implements IAgenceService {
     @Override
     public Agence update(Long id, Agence agence) {
         verifier(agence);
-        Agence existante = findById(id);
+        Agence existante = agenceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Agence non trouvée avec l'id : " + id));
         existante.setNom(agence.getNom());
         existante.setVille(agence.getVille());
         existante.setAdresse(agence.getAdresse());
